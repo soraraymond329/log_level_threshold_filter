@@ -1,6 +1,6 @@
 [project]
 name = "log-level-threshold-filter"
-version = "0.1.0"
+version = "0.1.1"
 description = "A filter that applies min/max level bounds so handlers can accept only records between WARNING and ERROR, excluding DEBUG and CRITICAL."
 requires-python = ">=3.10"
 dependencies = []

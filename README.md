@@ -30,3 +30,10 @@ The trade-off: the range is closed on both ends. The brief names ERROR as a leve
 `logging.NOTSET` is `0`, a perfectly valid integer. `LogLevelThresholdFilter(logging.NOTSET, logging.ERROR)` will accept records at level 0 (the ones no one ever called `setLevel` on). That is usually not what you want, but the filter honours it rather than rewriting your intent silently. If you mean "everything", pass `logging.DEBUG` explicitly.
 
 Level *names* are resolved at construction; a name unknown to the `logging` module raises `ValueError` immediately. `bool` is rejected even though it subclasses `int`, because `True` would silently mean level 1.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
